@@ -1,0 +1,12 @@
+104Akagi KaiCVLv.4258 / 77
+03:16:5003:20:00ReppuuReppuuRyuusei KaiSaiun
+886Ashigara KaiCALv.5939 / 55
+02:42:3003:00:0020.3cm Twin Gun Mount20.3cm Twin Gun MountType 0 Reconnaissance SeaplaneType 21 Air Radar
+681KashimaCTLv.304 / 36
+01:51:27-20.3cm Twin Gun Mount20.3cm Twin Gun Mount1
+1133SouryuuCVLv.212 / 50
+01:39:41-1227187
+796Mutsu KaiBBLv.4181 / 90
+01:32:0001:40:0015.5cm Triple Gun Mount15.5cm Triple Secondary Gun MountType 0 Reconnaissance SeaplaneType 91 AP Shell
+534YahagiCLLv.166 / 31
+00:51:08-15.5cm Triple Gun Mount15.2cm Twin Gun MountType 93 Passive Sonar
