@@ -58,14 +58,19 @@ int main() {
     stringstream relevant;
     string firstLine, secondLine, ship;
     vector<ShipGirl> shipList;
-    char lastChar;
+    char lastChar = '~';
     int repair = 0, hours = 0, minutes = 0, seconds = 0, dockSize = 0;
+	string fileName;
+	int pause;
+
+    cout << "Welcome to the kantai repair calculator, please type the name of your txt file: ";
+	cin >> fileName;
+	cout << endl;
     
-    cout << "Welcome to the kantai repair calculator, loading repair file...\n";
-    
-    filestream.open("repairbackup.txt");
+    filestream.open(fileName.c_str());
     if (!filestream.is_open()) {
-        cout << "There was an error loading your file or it does not exist.\n";
+        cout << "There was an error loading your file or it does not exist." << endl;
+		cin >> pause;
         return -1;
     }
     
@@ -171,6 +176,12 @@ int main() {
         }
         cout << endl << "Invalid number of docks, please type '2', '3', or '4'" << endl;
     }
+	if (dockSize == 3 || dockSize == 4) {
+		cout << "3 and 4 docks are a work in progress." << endl;
+		cin >> pause;
+		return 0;
+	}
+
     cout << endl;
     
     printList(shipList);
@@ -179,6 +190,8 @@ int main() {
     
     repairDocks.checkTwoDocks();
     repairDocks.printTwoDocks();
+
+	cin >> pause;
     
     return 0;
 }

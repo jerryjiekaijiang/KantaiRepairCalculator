@@ -78,6 +78,7 @@ void Dock::checkTwoDocks() {
 
 void Dock::printTwoDocks() const {
     cout << "Dock 1:" << endl;
+	cout << dock1Sum() << endl;
     for (int i = 0; i < dock1.size(); i++) {
         dock1.at(i).display();
     }
@@ -85,6 +86,7 @@ void Dock::printTwoDocks() const {
     for (int i = 0; i < dock2.size(); i++) {
         dock2.at(i).display();
     }
+	cout << dock2Sum() << endl;
     
     return;
 }
