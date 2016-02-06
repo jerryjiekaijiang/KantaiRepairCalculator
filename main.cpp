@@ -9,7 +9,6 @@
 using namespace std;
 
 #include "ShipGirl.h"
-//lewd
 #include "Dock.h"
 
 double avg(const vector<int>& values) {
@@ -73,6 +72,11 @@ int main() {
 		cin >> pause;
         return -1;
     }
+	char firstChar = filestream.peek();
+	while (firstChar < 48 || firstChar > 57) {
+		filestream.ignore(50, '\n');
+		firstChar = filestream.peek();
+	}
     
     while (getline(filestream, firstLine)) {
         //cout << firstLine << endl;
