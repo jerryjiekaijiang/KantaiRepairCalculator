@@ -1,0 +1,13 @@
+Docking Time? Help Topics
+IDNameTypeLevelHPDockingFacilityEquipment
+Page 1
+714Haguro KaiCALv.6312 / 55
+07:48:07-20.3cm Twin Gun Mount20.3cm Twin Gun MountType 0 Reconnaissance SeaplaneType 21 Air Radar
+886Ashigara Kai NiCALv.6941 / 56
+02:54:5203:00:0020.3cm (No.2) Twin Gun Mount20.3cm (No.2) Twin Gun MountType 0 Reconnaissance SeaplaneType 21 Air Radar
+266Maya Kai NiCALv.8150 / 57
+01:34:0701:40:0020.3cm (No.2) Twin Gun Mount20.3cm Twin Gun MountType 0 Observation SeaplaneType 21 Air Radar
+590Suzuya KaiCAVLv.5246 / 50
+00:37:3000:40:0020.3cm Twin Gun Mount20.3cm Twin Gun MountZuiunDrum Canister
+29Kiso Kai NiCLTLv.6842 / 44
+00:15:5000:20:0020.3cm Twin Gun Mount20.3cm Twin Gun MountType A Ko-hyoteki
