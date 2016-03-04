@@ -65,6 +65,13 @@ int main() {
     cout << "Welcome to the kantai repair calculator, please type the name of your txt file: ";
 	cin >> fileName;
 	cout << endl;
+	
+	if (fileName.find(".") == string::npos) {
+	    fileName += "txt";
+	} else if (fileName.substr(fileName.find_last_of(".") + 1) != "txt") {
+	    cout << "Invalid file type!";
+	    return 0;
+	}
     
     filestream.open(fileName.c_str());
     if (!filestream.is_open()) {
@@ -171,6 +178,12 @@ int main() {
         shipList.push_back(ShipGirl(repair, ship));
     }
     
+    if (shipList.empty()) {
+        cout << "File loaded, but empty file." << endl;
+        cin.get();
+        return 0;
+    }
+    
     cout << "File loaded." << endl;
     
     cout << "Dock size: ";
@@ -180,9 +193,9 @@ int main() {
         }
         cout << endl << "Invalid number of docks, please type '2', '3', or '4'" << endl;
     }
-	if (dockSize == 3 || dockSize == 4) {
-		cout << "3 and 4 docks are a work in progress." << endl;
-		cin >> pause;
+	if (dockSize == 4) {
+		cout << "4 docks are a work in progress." << endl;
+		cin.get();
 		return 0;
 	}
 
@@ -191,9 +204,13 @@ int main() {
     printList(shipList);
     
     Dock repairDocks(shipList);
-    
-    repairDocks.checkTwoDocks();
-    repairDocks.printTwoDocks();
+    if (dockSize == 2) {
+        repairDocks.checkTwoDocks();
+        repairDocks.printDocks(2);
+    } else {
+        repairDocks.checkThreeDocks();
+        repairDocks.printDocks(3);
+    }
 
 	cin >> pause;
     

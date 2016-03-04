@@ -5,13 +5,21 @@
 using namespace std;
 
 ShipGirl::ShipGirl() {
-    shipName = "YOUR WAIFU IS TRASH";
+    shipName = "";
     repairTime = 0;
+    akashi = false;
 }
 
 ShipGirl::ShipGirl(int repairTime, string shipName) {
     this->shipName = shipName;
     this->repairTime = repairTime;
+    akashi = false;
+}
+
+ShipGirl::ShipGirl(int repairTime, string shipName, bool akashi) {
+    this->shipName = shipName;
+    this->repairTime = repairTime;
+    this->akashi = akashi;
 }
 
 int ShipGirl::getTime() const {
@@ -20,6 +28,10 @@ int ShipGirl::getTime() const {
 
 string ShipGirl::getName() const {
     return shipName;
+}
+
+bool ShipGirl::getAkashi() const {
+    return akashi;
 }
 
 void ShipGirl::display() const {
