@@ -3,7 +3,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cmath>
 #include <cstdlib>
 
 using namespace std;
@@ -11,31 +10,38 @@ using namespace std;
 #include "ShipGirl.h"
 #include "Dock.h"
 
-double avg(const vector<int>& values) {
-    double count = 0, sum = 0;
-    for (int i = 0; i < values.size(); i++) {
-        sum += values.at(i);
-        count++;
-    }
-    return (sum / count); 
-}
+// double avg(const vector<ShipGirl>& values) {
+//     double count = 0, sum = 0;
+//     for (int i = 0; i < values.size(); i++) {
+//         sum += values.at(i);
+//         count++;
+//     }
+//     return (sum / count); 
+// }
 
-double standardDeviation(const vector<int>& values) {
-    double numer = 0;
-    double average = avg(values);
-    double denom = values.size() - 1;
+// double standardDeviation(const vector<ShipGirl>& values) {
+//     double numer = 0;
+//     double average = avg(values);
+//     double denom = values.size() - 1;
     
-    for (int i = 0; i < values.size(); i++) {
-        numer += pow(average - values.at(i), 2);
-    }
+//     for (int i = 0; i < values.size(); i++) {
+//         numer += pow(average - values.at(i), 2);
+//     }
     
-    return (numer / denom);
-}
+//     return (numer / denom);
+// }
+
+// void recommendBuckets(vector<ShipGirl> & v) {
+//     double avg()
+// }
 
 void printList(const vector<ShipGirl>& dock) {
+    if (dock.empty()) {
+        cout << "Nothing" << endl;
+        return;
+    }
     for (int i = 0; i < dock.size(); i++) {
         dock.at(i).display();
-        cout << endl;
     }
     
     return;
@@ -67,7 +73,7 @@ int main() {
 	cout << endl;
 	
 	if (fileName.find(".") == string::npos) {
-	    fileName += "txt";
+	    fileName += ".txt";
 	} else if (fileName.substr(fileName.find_last_of(".") + 1) != "txt") {
 	    cout << "Invalid file type!";
 	    return 0;
@@ -193,23 +199,45 @@ int main() {
         }
         cout << endl << "Invalid number of docks, please type '2', '3', or '4'" << endl;
     }
-	if (dockSize == 4) {
-		cout << "4 docks are a work in progress." << endl;
-		cin.get();
-		return 0;
-	}
+// 	if (dockSize == 4) {
+// 		cout << "4 docks are a work in progress." << endl;
+// 		cin.get();
+// 		return 0;
+// 	}
 
     cout << endl;
     
     printList(shipList);
     
+    //recommend buckets
+    
     Dock repairDocks(shipList);
+    Dock bucketedDocks(shipList);
+    
     if (dockSize == 2) {
         repairDocks.checkTwoDocks();
         repairDocks.printDocks(2);
-    } else {
+        vector<ShipGirl> bucketList = bucketedDocks.recommendBuckets();
+        cout << endl << "Recommended buckets: " << endl;
+        printList(bucketList);
+        bucketedDocks.checkTwoDocks();
+        bucketedDocks.printDocks(2);
+    } else if (dockSize == 3) {
         repairDocks.checkThreeDocks();
         repairDocks.printDocks(3);
+        vector<ShipGirl> bucketList = bucketedDocks.recommendBuckets();
+        cout << endl << "Recommended buckets: " << endl;
+        printList(bucketList);
+        bucketedDocks.checkTwoDocks();
+        bucketedDocks.printDocks(3);
+    } else {
+        repairDocks.checkFourDocks();
+        repairDocks.printDocks(4);
+        vector<ShipGirl> bucketList = bucketedDocks.recommendBuckets();
+        cout << endl << "Recommended buckets: " << endl;
+        printList(bucketList);
+        bucketedDocks.checkTwoDocks();
+        bucketedDocks.printDocks(4);
     }
 
 	cin >> pause;

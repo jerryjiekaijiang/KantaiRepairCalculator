@@ -67,88 +67,107 @@ int Dock::dock3Sum() const {
     }
     return sum;
 }
-
-void Dock::checkTwoDocks() {
-    assignTwoDocks();
-    
-    if (shipList.size() <= 2) {
-        return;
+int Dock::dock4Sum() const {
+    int sum = 0;
+    for (int i = 0; i < dock4.size(); i++) {
+        sum+= dock4.at(i).getTime();
     }
-    
-    int iterations;
-    //across
-    do {
-        iterations = 0;
-        int highest = getHighest(2);
-        
-        for (int i = 0; i < dock1.size(); i++) {
-            for (int j = 0; j < dock2.size(); j++) {
-                highest = getHighest(2);
-                ShipGirl temp = dock1.at(i);
-                dock1.at(i) = dock2.at(j);
-                dock2.at(j) = temp;
-                if (getHighest(2) < highest) {
-                    iterations++;
-                } else {
-                    temp = dock1.at(i);
-                    dock1.at(i) = dock2.at(j);
-                    dock2.at(j) = temp;
-                }
-            }
-        }
-    } while (iterations > 0);
-    // do {
-    //     iterations = 0;
-        
-    //     for (int i = 0; i < dock1.size(); i++) {
-    //         for (int j = 0; j < dock2.size(); j++) {
-    //             if (currentDifference > abs(dock1.at(i).getTime() - dock2.at(j).getTime())) {
-    //                 ShipGirl swapTemp = dock1.at(i);
-    //                 dock1.at(i) = dock2.at(j);
-    //                 dock2.at(j) = swapTemp;
-    //                 if (currentDifference < abs(dock1Sum() - dock2Sum())) {
-    //                     swapTemp = dock1.at(i);
-    //                     dock1.at(i) = dock2.at(j);
-    //                     dock2.at(j) = swapTemp;
-    //                 } else {
-    //                     currentDifference = abs(dock1Sum() - dock2Sum());
-    //                     iterations++;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // } while (iterations > 0);
-    
-    return;
+    return sum;
 }
+
+// void Dock::checkTwoDocks() {
+//     assignTwoDocks();
+    
+//     if (shipList.size() <= 2) {
+//         return;
+//     }
+    
+//     int iterations;
+//     //across
+//     do {
+//         iterations = 0;
+//         int highest = getHighest(2);
+        
+//         for (int i = 0; i < dock1.size(); i++) {
+//             for (int j = 0; j < dock2.size(); j++) {
+//                 highest = getHighest(2);
+//                 ShipGirl temp = dock1.at(i);
+//                 dock1.at(i) = dock2.at(j);
+//                 dock2.at(j) = temp;
+//                 if (getHighest(2) < highest) {
+//                     iterations++;
+//                 } else {
+//                     temp = dock1.at(i);
+//                     dock1.at(i) = dock2.at(j);
+//                     dock2.at(j) = temp;
+//                 }
+//             }
+//         }
+//     } while (iterations > 0);
+//     // do {
+//     //     iterations = 0;
+        
+//     //     for (int i = 0; i < dock1.size(); i++) {
+//     //         for (int j = 0; j < dock2.size(); j++) {
+//     //             if (currentDifference > abs(dock1.at(i).getTime() - dock2.at(j).getTime())) {
+//     //                 ShipGirl swapTemp = dock1.at(i);
+//     //                 dock1.at(i) = dock2.at(j);
+//     //                 dock2.at(j) = swapTemp;
+//     //                 if (currentDifference < abs(dock1Sum() - dock2Sum())) {
+//     //                     swapTemp = dock1.at(i);
+//     //                     dock1.at(i) = dock2.at(j);
+//     //                     dock2.at(j) = swapTemp;
+//     //                 } else {
+//     //                     currentDifference = abs(dock1Sum() - dock2Sum());
+//     //                     iterations++;
+//     //                 }
+//     //             }
+//     //         }
+//     //     }
+//     // } while (iterations > 0);
+    
+//     return;
+// }
 
 void Dock::printDocks(int docks) const {
     cout << "Dock 1:" << endl;
     for (int i = 0; i < dock1.size(); i++) {
         dock1.at(i).display();
+        //test
+        //cout << dock1.at(i).getTime() << endl;
     }
-	cout << dock1Sum() << endl;
+	//cout << dock1Sum() << endl;
     cout << "Dock 2:" << endl;
     for (int i = 0; i < dock2.size(); i++) {
         dock2.at(i).display();
+        //test
+        //cout << dock2.at(i).getTime() << endl;
     }
-	cout << dock2Sum() << endl;
+	//cout << dock2Sum() << endl;
     
     if (docks > 2) {
         cout << "Dock 3:" << endl;
         for (int i = 0; i < dock3.size(); i++) {
             dock3.at(i).display();
+            //test
+            //cout << dock3.at(i).getTime() << endl;
         }
-    	cout << dock3Sum() << endl;
+    	//cout << dock3Sum() << endl;
+    }
+    if (docks > 3) {
+        cout << "Dock 4:" << endl;
+        for (int i = 0; i < dock4.size(); i++) {
+            dock4.at(i).display();
+            //test
+            //cout << dock4.at(i).getTime() << endl;
+        }
+    	//cout << dock4Sum() << endl;
     }
     return;
 }
 
-
-
 void Dock::assignTwoDocks() {
-    int sumDock1;
-    int sumDock2;
+    int sumDock1, sumDock2;
     //int reversed = 0;
     
     for (unsigned int i = 0; i < shipList.size(); i++) {
@@ -207,6 +226,9 @@ int Dock::getHighest(int docks) const {
     if (docks > 2) {
         temp.push_back(dock3Sum());
     }
+    if (docks > 3) {
+        temp.push_back(dock4Sum());
+    }
     int max = dock1Sum();
     for (int i = 0; i < temp.size(); i++) {
         if (max < temp.at(i)) {
@@ -215,6 +237,59 @@ int Dock::getHighest(int docks) const {
     }
     
     return max;
+}
+
+void Dock::assignFourDocks() {
+    int sumDock1, sumDock2, sumDock3, sumDock4;
+    //int reversed = 0;
+    
+    for (unsigned int i = 0; i < shipList.size(); i++) {
+        sumDock1 = dock1Sum();
+        sumDock2 = dock2Sum();
+        sumDock3 = dock3Sum();
+        sumDock4 = dock4Sum();
+
+        if (sumDock1 == sumDock2 && sumDock2 == sumDock3 && sumDock3 == sumDock4) {
+            dock1.push_back(shipList.at(i));
+        } else if (sumDock1 < sumDock2 && sumDock1 < sumDock3 && sumDock1 < sumDock4) {
+            dock1.push_back(shipList.at(i));
+        } else if (sumDock2 < sumDock1 && sumDock2 < sumDock3 && sumDock2 < sumDock4) {
+            dock2.push_back(shipList.at(i));
+        } else if (sumDock3 < sumDock1 && sumDock3 < sumDock2 && sumDock3 < sumDock4) {
+            dock3.push_back(shipList.at(i));
+        } else if (sumDock4 < sumDock1 && sumDock4 < sumDock3 && sumDock4 < sumDock2) {
+            dock4.push_back(shipList.at(i));
+        } else if (sumDock1 == sumDock2 && sumDock3 == sumDock4 && sumDock1 < sumDock3) { 
+            dock1.push_back(shipList.at(i));
+        } else if (sumDock2 == sumDock3 && sumDock4 == sumDock1 && sumDock2 < sumDock4) { 
+            dock2.push_back(shipList.at(i));
+        } else if (sumDock1 == sumDock2 && sumDock1 < sumDock3 && sumDock1 < sumDock4) { 
+            dock1.push_back(shipList.at(i));
+        } else if (sumDock2 == sumDock3 && sumDock2 < sumDock1 && sumDock2 < sumDock4) { 
+            dock2.push_back(shipList.at(i));
+        } else if (sumDock3 == sumDock4 && sumDock3 < sumDock1 && sumDock3 < sumDock2) { 
+            dock3.push_back(shipList.at(i));
+        } else if (sumDock4 == sumDock1 && sumDock4 < sumDock2 && sumDock4 < sumDock3) { 
+            dock4.push_back(shipList.at(i));
+        } else if (sumDock1 == sumDock2 && sumDock2 == sumDock3 && sumDock1 < sumDock4) {
+            dock1.push_back(shipList.at(i));
+        } else if (sumDock2 == sumDock3 && sumDock3 < sumDock4 && sumDock2 < sumDock1) {
+            dock2.push_back(shipList.at(i));
+        } else if (sumDock3 == sumDock4 && sumDock4 == sumDock1 && sumDock3 < sumDock2) {
+            dock3.push_back(shipList.at(i));
+        } else if (sumDock4 == sumDock1 && sumDock1 == sumDock2 && sumDock4 < sumDock3) {
+            dock4.push_back(shipList.at(i));
+        } else if (sumDock1 < sumDock2 || sumDock1 < sumDock3 || sumDock1 < sumDock4) {
+            dock1.push_back(shipList.at(i));
+        } else if (sumDock2 < sumDock1 || sumDock2 < sumDock3 || sumDock2 < sumDock4) {
+            dock2.push_back(shipList.at(i));
+        } else if (sumDock3 < sumDock1 || sumDock3 < sumDock2 || sumDock3 < sumDock4) {
+            dock3.push_back(shipList.at(i));
+        } else if (sumDock4 < sumDock1 || sumDock4 < sumDock3 || sumDock4 < sumDock2) {
+            dock4.push_back(shipList.at(i));
+        }
+    }
+    return;
 }
 
 vector<ShipGirl>* Dock::getHighestDock(int docks) {
@@ -227,6 +302,7 @@ vector<ShipGirl>* Dock::getHighestDock(int docks) {
     temp.push_back(dock2Sum());
     if (docks > 2) {
         temp.push_back(dock3Sum());
+        temp.push_back(dock4Sum());
     }
     
     int max = dock1Sum();
@@ -249,6 +325,56 @@ vector<ShipGirl>* Dock::getHighestDock(int docks) {
         ptr = &dock3;
         return ptr;
     }
+    if (maxIndex == 3) {
+        ptr = &dock4;
+        return ptr;
+    }
+}
+
+void Dock::checkTwoDocks() {
+    assignTwoDocks();
+    
+    if (shipList.size() <= 2) {
+        return;
+    }
+    int iterations;
+    //across
+    do {
+        iterations = 0;
+        int highest = getHighest(2);
+        vector<ShipGirl>* biggestDock = getHighestDock(2);
+        
+        for (int i = 0; i < biggestDock->size(); i++) {
+            for (int j = 0; biggestDock != &dock1 && j < dock1.size(); j++) {
+                highest = getHighest(2);
+                ShipGirl temp = biggestDock->at(i);
+                biggestDock->at(i) = dock1.at(j);
+                dock1.at(j) = temp;
+                if (getHighest(2) < highest) {
+                    iterations++;
+                } else {
+                    temp = biggestDock->at(i);
+                    biggestDock->at(i) = dock1.at(j);
+                    dock1.at(j) = temp;
+                }
+            }
+            for (int j = 0; biggestDock != &dock2 && j < dock2.size(); j++) {
+                highest = getHighest(2);
+                ShipGirl temp = biggestDock->at(i);
+                biggestDock->at(i) = dock2.at(j);
+                dock2.at(j) = temp;
+                if (getHighest(2) < highest) {
+                    iterations++;
+                } else {
+                    temp = biggestDock->at(i);
+                    biggestDock->at(i) = dock2.at(j);
+                    dock2.at(j) = temp;
+                }
+            }
+        }
+    } while (iterations > 0);
+    
+    return;
 }
 
 void Dock::checkThreeDocks() {
@@ -310,41 +436,115 @@ void Dock::checkThreeDocks() {
     return;
 }
 
-// void Dock::checkTwoDocks() {
-//     assignTwoDocks();
+void Dock::checkFourDocks() {
+    assignFourDocks();
     
-//     if (shipList.size() <= 2) {
-//         return;
-//     }
-    
-//     int sumDock1 = dock1Sum();
-//     int sumDock2 = dock2Sum();
-//     int currentDifference = abs(dock1Sum() - dock2Sum());
-    
-//     //across
-//     int iterations;
-    
-//     do {
-//         iterations = 0;
+    if (shipList.size() <= 4) {
+        return;
+    }
+    int iterations;
+    //across
+    do {
+        iterations = 0;
+        int highest = getHighest(4);
+        vector<ShipGirl>* biggestDock = getHighestDock(4);
         
-//         for (int i = 0; i < dock1.size(); i++) {
-//             for (int j = 0; j < dock2.size(); j++) {
-//                 if (currentDifference > abs(dock1.at(i).getTime() - dock2.at(j).getTime())) {
-//                     ShipGirl swapTemp = dock1.at(i);
-//                     dock1.at(i) = dock2.at(j);
-//                     dock2.at(j) = swapTemp;
-//                     if (currentDifference < abs(dock1Sum() - dock2Sum())) {
-//                         swapTemp = dock1.at(i);
-//                         dock1.at(i) = dock2.at(j);
-//                         dock2.at(j) = swapTemp;
-//                     } else {
-//                         currentDifference = abs(dock1Sum() - dock2Sum());
-//                         iterations++;
-//                     }
-//                 }
-//             }
-//         }
-//     } while (iterations > 0);
+        for (int i = 0; i < biggestDock->size(); i++) {
+            for (int j = 0; biggestDock != &dock1 && j < dock1.size(); j++) {
+                highest = getHighest(4);
+                ShipGirl temp = biggestDock->at(i);
+                biggestDock->at(i) = dock1.at(j);
+                dock1.at(j) = temp;
+                if (getHighest(4) < highest) {
+                    iterations++;
+                } else {
+                    temp = biggestDock->at(i);
+                    biggestDock->at(i) = dock1.at(j);
+                    dock1.at(j) = temp;
+                }
+            }
+            for (int j = 0; biggestDock != &dock2 && j < dock2.size(); j++) {
+                highest = getHighest(4);
+                ShipGirl temp = biggestDock->at(i);
+                biggestDock->at(i) = dock2.at(j);
+                dock2.at(j) = temp;
+                if (getHighest(4) < highest) {
+                    iterations++;
+                } else {
+                    temp = biggestDock->at(i);
+                    biggestDock->at(i) = dock2.at(j);
+                    dock2.at(j) = temp;
+                }
+            }
+            for (int j = 0; biggestDock != &dock3 && j < dock3.size(); j++) {
+                highest = getHighest(4);
+                ShipGirl temp = biggestDock->at(i);
+                biggestDock->at(i) = dock3.at(j);
+                dock3.at(j) = temp;
+                if (getHighest(4) < highest) {
+                    iterations++;
+                } else {
+                    temp = biggestDock->at(i);
+                    biggestDock->at(i) = dock3.at(j);
+                    dock3.at(j) = temp;
+                }
+            }
+            for (int j = 0; biggestDock != &dock4 && j < dock4.size(); j++) {
+                highest = getHighest(4);
+                ShipGirl temp = biggestDock->at(i);
+                biggestDock->at(i) = dock4.at(j);
+                dock4.at(j) = temp;
+                if (getHighest(4) < highest) {
+                    iterations++;
+                } else {
+                    temp = biggestDock->at(i);
+                    biggestDock->at(i) = dock4.at(j);
+                    dock4.at(j) = temp;
+                }
+            }
+        }
+    } while (iterations > 0);
     
-//     return;
-// }
+    return;
+}
+
+int avg(const vector<ShipGirl>& values) {
+    int count = 0, sum = 0;
+    for (int i = 0; i < values.size(); i++) {
+        sum += values.at(i).getTime();
+        count++;
+    }
+    return (sum / count); 
+}
+
+int stdDev(const vector<ShipGirl>& values) {
+    int numer = 0;
+    int average = avg(values);
+    int denom;
+    if (values.size() > 1)
+        denom = values.size() - 1;
+    if (values.size() == 1)
+        denom = 1;
+    
+    for (int i = 0; i < values.size(); i++) {
+        numer += pow(values.at(i).getTime() - average, 2);
+    }
+    
+    return sqrt(numer / denom);
+}
+
+vector<ShipGirl> Dock::recommendBuckets() {
+    int average = avg(shipList);
+    int standard = stdDev(shipList);
+    vector<ShipGirl> bucketed;
+    
+    for (int i = 0; i < shipList.size(); i++) {
+        if (shipList.at(i).getTime() > average + (standard)) {
+            bucketed.push_back(shipList.at(i));
+            shipList.erase(shipList.begin() + i);
+            i--;
+        }
+    }
+    
+    return bucketed;
+}
